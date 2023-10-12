@@ -1,5 +1,4 @@
-﻿using System.Threading;
-using System.Timers;
+﻿using System.Timers;
 using Timer = System.Timers.Timer;
 
 namespace SpellingMAUI
@@ -10,7 +9,8 @@ namespace SpellingMAUI
         int correct = 0;
         int incorrect = 0;
         string currentWord = null;
-        System.Timers.Timer timer = null;
+        Timer timer = null;
+        List<string> incorrectWords = new List<string>();
         readonly Random random = new Random();
         private readonly TodoItemDatabase database;
 
@@ -43,7 +43,12 @@ namespace SpellingMAUI
         {
             string text = ((Entry)sender).Text;
 
-            if (!string.IsNullOrEmpty(currentWord) && !string.IsNullOrEmpty(text))
+            if (string.IsNullOrEmpty(text))
+            {
+                return;
+            }
+
+            if (!string.IsNullOrEmpty(currentWord))
             {
                 if (currentWord.ToLower() == text.ToLower())
                 {
@@ -54,6 +59,7 @@ namespace SpellingMAUI
                 {
                     incorrect++;
                     AnswerLbl.TextColor = Color.Parse("Red");
+                    incorrectWords.Add(currentWord);
                 }
             }
             AnswerLbl.Text = currentWord;
@@ -66,14 +72,14 @@ namespace SpellingMAUI
         }
 
         private async void SpeakBtn_Clicked(object sender, EventArgs e)
-        {
+        {            
             currentWord = GetRandomWord();
             SpeakBtn.IsEnabled = false;
             StopBtn.IsEnabled = true;
             ResultLbl.IsVisible = true;
             AnswerLbl.IsVisible = true;
-            await SpeakNowDefaultSettingsAsync(currentWord);
             timer.Start();
+            await SpeakNowDefaultSettingsAsync(currentWord);
         }
 
         string GetRandomWord()
@@ -118,10 +124,9 @@ namespace SpellingMAUI
             correct = incorrect = count = 0;
             ResultLbl.IsVisible = false;
             AnswerLbl.IsVisible = false;
-            ResultLbl.Text = $"Correct: {correct}   Incorrect: {incorrect}";
-            AnswerLbl.Text = $"Answer: " + currentWord;
-
-
+            ResultLbl.Text = $"Wrong anwers: \n {string.Join(", ", incorrectWords)}";
+            incorrectWords.Clear();
+            AnswerLbl.Text = "";
         }
     }
 }
