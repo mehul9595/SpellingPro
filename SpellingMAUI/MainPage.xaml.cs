@@ -32,7 +32,10 @@ namespace SpellingMAUI
         {
             MainThread.BeginInvokeOnMainThread(() =>
             {
-                TimerLbl.Text = e.SignalTime.ToString();
+                MainThread.InvokeOnMainThreadAsync(() =>
+                {
+                    TimerLbl.Text = e.SignalTime.ToString("T");
+                });
             });
         }
 
@@ -117,8 +120,8 @@ namespace SpellingMAUI
             AnswerLbl.IsVisible = false;
             ResultLbl.Text = $"Correct: {correct}   Incorrect: {incorrect}";
             AnswerLbl.Text = $"Answer: " + currentWord;
-            
-            
+
+
         }
     }
 }
