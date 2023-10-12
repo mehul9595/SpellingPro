@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="SpellingMAUI.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Spacing="25"
+            Padding="30,0"
+            VerticalOptions="CenterAndExpand">
+
+            <Image
+                Source="dotnet_bot.png"
+                SemanticProperties.Description="Cute dot net bot waving hi to you!"
+                HeightRequest="150"
+                HorizontalOptions="Center" />
+
+            <Label
+                Text="Practice Spellings!"
+                SemanticProperties.HeadingLevel="Level1"
+                FontSize="32"
+                HorizontalOptions="Center" />
+
+            <Entry Placeholder="Spell test!" x:Name="TxtSpell" Completed="TxtSpell_Completed" ></Entry>
+
+            <HorizontalStackLayout Spacing="10">
+                <Button
+                    x:Name="SpeakBtn"
+                    Text="Start"
+                    SemanticProperties.Hint="Starts the dictation"
+                    Clicked="SpeakBtn_Clicked"
+                    HorizontalOptions="Start" >
+                </Button>
+
+                <Button x:Name="StopBtn" 
+                        Text="Stop"
+                        SemanticProperties.Hint="Stops the dictation"
+                        Clicked="StopBtn_Clicked"
+                        HorizontalOptions="End" IsEnabled="False">
+                </Button>
+            </HorizontalStackLayout>
+
+
+            <Label x:Name="AnswerLbl" IsVisible="False"></Label>
+            <Label x:Name="ResultLbl" IsVisible="False" ></Label>
+            <Label x:Name="TimerLbl" IsVisible="{Binding Source={x:Reference AnswerLbl}, Path=IsVisible}" />
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
