@@ -1,1 +1,1 @@
-# MauiApp2
+# Spelling Pro
