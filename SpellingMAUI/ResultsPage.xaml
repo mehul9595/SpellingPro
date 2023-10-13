@@ -49,9 +49,12 @@
                                />
                         <Label Grid.Column="1" Grid.Row="0"
                                Text="{Binding Correct}"
+                               TextColor="Green"
                                />
                         <Label Grid.Column="2" Grid.Row="0"                           
                                Text="{Binding InCorrect}"
+                               TextColor="Red"
+                               ToolTipProperties.Text="{Binding IncorrectWords}"
                                 />
                         <Label Grid.Column="3" Grid.Row="0"                           
                                Text="{Binding Time}"
