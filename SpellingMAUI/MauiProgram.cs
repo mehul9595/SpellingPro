@@ -14,6 +14,8 @@ namespace SpellingMAUI
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
+            builder.Services.AddSingleton<YourListPage>();
+            builder.Services.AddTransient<SpellingPage>();
             //builder.Services.AddSingleton<TodoListPage>();
             //builder.Services.AddTransient<TodoItemPage>();
             builder.Services.AddSingleton<MainPage>();

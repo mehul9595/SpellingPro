@@ -21,13 +21,18 @@ namespace SpellingMAUI
                 return;
 
             Database = new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);
-            var result = await Database.CreateTableAsync<UserScores>();
-            
+            var result = await Database.CreateTablesAsync<UserScores, Spelling>();
         }
         public async Task<List<UserScores>> GetItemsAsync()
         {
             await Init();
             return await Database.Table<UserScores>().ToListAsync();
+        }
+        
+        public async Task<List<Spelling>> GetSpellingsAsync()
+        {
+            await Init();
+            return await Database.Table<Spelling>().ToListAsync();
         }
 
         public async Task<List<UserScores>> GetItemsNotDoneAsync()
@@ -53,8 +58,23 @@ namespace SpellingMAUI
             else
                 return await Database.InsertAsync(item);
         }
+        
+        public async Task<int> SaveSpellingAsync(Spelling item)
+        {
+            await Init();
+            if (item.ID != 0)
+                return await Database.UpdateAsync(item);
+            else
+                return await Database.InsertAsync(item);
+        }
 
         public async Task<int> DeleteItemAsync(UserScores item)
+        {
+            await Init();
+            return await Database.DeleteAsync(item);
+        }
+        
+        public async Task<int> DeleteSpellingAsync(Spelling item)
         {
             await Init();
             return await Database.DeleteAsync(item);

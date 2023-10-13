@@ -12,8 +12,8 @@
             ContentTemplate="{DataTemplate local:MainPage}"
             Route="MainPage" /> 
         <ShellContent
-            Title="About"
-            ContentTemplate="{DataTemplate local:AboutPage}"
+            Title="Your List"
+            ContentTemplate="{DataTemplate local:YourListPage}"
             />
         <ShellContent 
             Title="Results"
