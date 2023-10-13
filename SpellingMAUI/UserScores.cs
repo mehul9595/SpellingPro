@@ -8,6 +8,7 @@ public class UserScores
     public int ID { get; set; }
     public int Correct { get; set; }
     public int InCorrect { get; set; }
+    public string IncorrectWords { get; set; }
     public string Time { get; set; }
     public bool Done { get; set; }
 }
