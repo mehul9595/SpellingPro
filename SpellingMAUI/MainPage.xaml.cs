@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Timers;
-using Timer = System.Threading.Timer;
+﻿using Timer = System.Threading.Timer;
 
 namespace SpellingMAUI;
 
+[QueryProperty("WordStr", "WordStr")]
 public partial class MainPage : ContentPage
 {
     int correct = 0;
@@ -19,6 +18,8 @@ public partial class MainPage : ContentPage
 
     private List<string> Words { get; set; }
 
+    public string WordStr { get; set; }
+
     public MainPage(TodoItemDatabase todoItemDatabase)
     {
         InitializeComponent();
@@ -28,7 +29,7 @@ public partial class MainPage : ContentPage
 
     private void LoadSpellings()
     {
-        Words = wordsStr.Split(',').Select(x => x.Trim()).Take(1).ToList();
+        Words = WordStr != null ? WordStr.Split(',').Select(x => x.Trim()).ToList() : new();
     }
 
     private async void TxtSpell_Completed(object sender, EventArgs e)
@@ -71,6 +72,9 @@ public partial class MainPage : ContentPage
     {
         LoadSpellings();
         currentWord = GetRandomWord();
+        if (currentWord is null)
+            return;
+
         SpeakBtn.IsEnabled = false;
         StopBtn.IsEnabled = true;
         ResultLbl.IsVisible = true;

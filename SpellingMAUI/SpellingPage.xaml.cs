@@ -25,7 +25,7 @@ public partial class SpellingPage : ContentPage
             await DisplayAlert("Name Required", "Please enter a name for the todo item.", "OK");
             return;
         }
-
+        
         await database.SaveSpellingAsync(Item);
         await Shell.Current.GoToAsync("..");
     }

@@ -43,4 +43,15 @@ public partial class YourListPage : ContentPage
             ["Item"] = item
         });
     }
+
+    private async void OnPracticeClicked(object sender, EventArgs e)
+    {
+        if (SpellingCollection.SelectedItem is not Spelling item)
+            return;
+        
+        await Shell.Current.GoToAsync(nameof(MainPage), true, new Dictionary<string, object>
+        {
+            ["WordStr"] = item.Words
+        });
+    }
 }
