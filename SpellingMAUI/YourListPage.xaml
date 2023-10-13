@@ -4,22 +4,23 @@
              x:Class="SpellingMAUI.YourListPage"
              xmlns:models="clr-namespace:SpellingMAUI"
              Title="Your List">
-    <Grid RowDefinitions="*,Auto">
+    <Grid RowDefinitions="*,Auto, Auto">
         <CollectionView 
                   x:Name="SpellingCollection"
                   VerticalOptions="Fill"
                   ItemsSource="{Binding ObservableSpellingList}"
                   SelectionMode="Single"
-                  SelectionChanged="CollectionView_SelectionChanged">
+                  >
+            <!--SelectionChanged="CollectionView_SelectionChanged"-->
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:Spelling">
-                    <Grid ColumnDefinitions="*, Auto" Padding="20">
+                    <Grid ColumnDefinitions="25, 100, Auto" Padding="20">
                         <Label Text="{Binding ID}" Grid.Column="0"
                                     VerticalTextAlignment="Center"/>
                         <Label Text="{Binding Name}" Grid.Column="1"
                                     VerticalTextAlignment="Center"/>
-                        <!--<Label Text="{Binding Words}"
-                                    VerticalTextAlignment="Center"/>-->
+                        <Label Text="{Binding Words}" Grid.Column="2"
+                                    VerticalTextAlignment="Center"/>
                         <!--<Label Text="✔️"
                                    Grid.Column="1"
                                    VerticalTextAlignment="Center"

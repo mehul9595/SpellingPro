@@ -10,14 +10,15 @@
         <ShellContent
             Title="Home"
             ContentTemplate="{DataTemplate local:MainPage}"
-            Route="MainPage" /> 
+            Route="MainPage" />
         <ShellContent
             Title="Your List"
             ContentTemplate="{DataTemplate local:YourListPage}"
-            />
+            Route="YourListPage" />
         <ShellContent 
-            Title="Results"
+            Title="Scores"
             ContentTemplate="{DataTemplate local:ResultsPage}"
+            Route="Scores"
             />
     </TabBar>
 </Shell>

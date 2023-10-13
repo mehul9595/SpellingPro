@@ -4,9 +4,9 @@ namespace SpellingMAUI;
 
 public partial class YourListPage : ContentPage
 {
-	TodoItemDatabase database;
+	SpellingsDatabase database;
 	public ObservableCollection<Spelling> ObservableSpellingList { get; set; } = new();
-	public YourListPage(TodoItemDatabase todoItemDatabase)
+	public YourListPage(SpellingsDatabase todoItemDatabase)
 	{
 		InitializeComponent();
 		database = todoItemDatabase;
@@ -49,7 +49,7 @@ public partial class YourListPage : ContentPage
         if (SpellingCollection.SelectedItem is not Spelling item)
             return;
         
-        await Shell.Current.GoToAsync(nameof(MainPage), true, new Dictionary<string, object>
+        await Shell.Current.GoToAsync("//MainPage", true, new Dictionary<string, object>
         {
             ["WordStr"] = item.Words
         });

@@ -3,7 +3,7 @@ namespace SpellingMAUI;
 [QueryProperty("Item", "Item")]
 public partial class SpellingPage : ContentPage
 {
-	TodoItemDatabase database;
+	SpellingsDatabase database;
 
     public Spelling Item
 	{
@@ -11,7 +11,7 @@ public partial class SpellingPage : ContentPage
         set => BindingContext = value;
 	}
 
-	public SpellingPage(TodoItemDatabase todoItemDatabase)
+	public SpellingPage(SpellingsDatabase todoItemDatabase)
 	{
 		InitializeComponent();
 		database = todoItemDatabase;
@@ -34,7 +34,7 @@ public partial class SpellingPage : ContentPage
     {
         if (Item.ID == 0)
             return;
-        await database.DeleteSpellingAsync(Item);
+        await database.DeleteAsync(Item);
         await Shell.Current.GoToAsync("..");
     }
 

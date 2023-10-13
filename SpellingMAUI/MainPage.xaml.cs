@@ -11,16 +11,15 @@ public partial class MainPage : ContentPage
     Timer threadTimer = null;
     List<string> incorrectWords = new List<string>();
     readonly Random random = new Random();
-    private readonly TodoItemDatabase database;
+    private readonly SpellingsDatabase database;
 
     CancellationTokenSource cts;
-    string wordsStr = "intense, determine, deny, presentation, nucleus, neutral, intellectual, approach, circular, observe, literature, rotten, exposure, gesture, abstract, substantial, conservation, scent, Budget, alternative, competent, output, damp, potential, combine, oral, agricultural, association, critical, division, distribution, strategy, capacity, management, contest, preparation, prosperity, beneath, opponent, breed, launch, slave, electric, measure, manufacturer, equivalent, sensible, puzzle, virtually, widespread, bend, acceptance, signal, regulation, survive, prohibit, grand, definition, attain, define, evidence, substance, establish, welfare, propose, unite, publication, comparison, external, universal, requirement, characteristic, code, pulse, resource, statistics, operate, variable, faculty, statistical, efficiency, executive, operation, motivate, represent, diverse, criticism, concentration, enthusiasm, hence, participate, philosopher, suitable, rational, questionnaire, emotional, administration, precise, temperature, logical, tendency, accord, crowd, conference, atmosphere, genuine, concern, Republic, personnel, claim, Republican, structure, pack, complex, candidate, impressive, politics, filter, response, retain, reduction, excess, electrical, maintain, efficient, digital, span, application, interfere, commercial, possession, zone, evolve, flash, interpretation, convey, revolution, phrase, engage, peasant, racial, entertainment, magnificent, benefit, security, successfully, locate, concept, reveal, emerge, reform, essential, track, bang, outcome, threaten, exploit, impose, researcher, bind, molecule, magnetic, photograph, oxygen, trail, schedule, reproduce, sponsor, threat, implication, legend, democracy, marine, appliance, perfume, explosive, identify, unconscious, resemble, lean, estimate, recognise, photographic, stroke, density, demonstrate, agriculture, unique, publish, throughout, initial, trace, vibration, scale, sticky, refine, hatch, incident, flexible, criteria";
 
     private List<string> Words { get; set; }
 
     public string WordStr { get; set; }
 
-    public MainPage(TodoItemDatabase todoItemDatabase)
+    public MainPage(SpellingsDatabase todoItemDatabase)
     {
         InitializeComponent();
 
@@ -151,13 +150,16 @@ public partial class MainPage : ContentPage
         // save to database
         StopTimer();
 
-        UserScores scores = new UserScores();
-        scores.Correct = correct;
-        scores.InCorrect = incorrect;
-        scores.Time = TimerLbl.Text;
-        scores.IncorrectWords = string.Join(", ", incorrectWords);
+        if (correct > 0 || incorrect > 0)
+        {
+            UserScores scores = new UserScores();
+            scores.Correct = correct;
+            scores.InCorrect = incorrect;
+            scores.Time = TimerLbl.Text;
+            scores.IncorrectWords = string.Join(", ", incorrectWords);
 
-        await database.SaveItemAsync(scores);
+            await database.SaveItemAsync(scores);
+        }
 
         SpeakBtn.IsEnabled = true;
         StopBtn.IsEnabled = false;

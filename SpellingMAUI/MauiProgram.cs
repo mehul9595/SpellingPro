@@ -20,7 +20,7 @@ namespace SpellingMAUI
             //builder.Services.AddTransient<TodoItemPage>();
             builder.Services.AddSingleton<MainPage>();
             builder.Services.AddSingleton<ResultsPage>();
-            builder.Services.AddSingleton<TodoItemDatabase>();
+            builder.Services.AddSingleton<SpellingsDatabase>();
 
 #if DEBUG
             builder.Logging.AddDebug();
