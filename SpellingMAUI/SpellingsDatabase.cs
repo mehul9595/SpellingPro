@@ -16,7 +16,7 @@ public class SpellingsDatabase
             return;
 
         Database = new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);
-        var result = await Database.CreateTablesAsync<UserScores, Spelling>();
+        _ = await Database.CreateTablesAsync<UserScores, Spelling>();
     }
     public async Task<List<UserScores>> GetItemsAsync()
     {

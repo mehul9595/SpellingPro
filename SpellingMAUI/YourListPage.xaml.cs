@@ -4,16 +4,16 @@ namespace SpellingMAUI;
 
 public partial class YourListPage : ContentPage
 {
-	SpellingsDatabase database;
-	public ObservableCollection<Spelling> ObservableSpellingList { get; set; } = new();
-	public YourListPage(SpellingsDatabase todoItemDatabase)
-	{
-		InitializeComponent();
-		database = todoItemDatabase;
-		BindingContext = this;
-	}
+    SpellingsDatabase database;
+    public ObservableCollection<Spelling> ObservableSpellingList { get; set; } = new();
+    public YourListPage(SpellingsDatabase todoItemDatabase)
+    {
+        InitializeComponent();
+        database = todoItemDatabase;
+        BindingContext = this;
+    }
 
-	protected override async void OnNavigatedTo(NavigatedToEventArgs args)
+    protected override async void OnNavigatedTo(NavigatedToEventArgs args)
     {
         base.OnNavigatedTo(args);
         var items = await database.GetSpellingsAsync();
@@ -25,7 +25,7 @@ public partial class YourListPage : ContentPage
 
         });
     }
-    async void OnItemAdded(object sender, EventArgs e)
+    private async void OnItemAdded(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync(nameof(SpellingPage), true, new Dictionary<string, object>
         {
@@ -33,9 +33,9 @@ public partial class YourListPage : ContentPage
         });
     }
 
-    private async void  CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    private async void OnItemUpdated(object sender, EventArgs e)
     {
-        if (e.CurrentSelection.FirstOrDefault() is not Spelling item)
+        if (SpellingCollection.SelectedItem is not Spelling item)
             return;
 
         await Shell.Current.GoToAsync(nameof(SpellingPage), true, new Dictionary<string, object>
@@ -48,10 +48,11 @@ public partial class YourListPage : ContentPage
     {
         if (SpellingCollection.SelectedItem is not Spelling item)
             return;
-        
-        await Shell.Current.GoToAsync("//MainPage", true, new Dictionary<string, object>
+
+        // absolute route '//MainPage'
+        await Shell.Current.GoToAsync(nameof(MainPage), true, new Dictionary<string, object>
         {
-            ["WordStr"] = item.Words
+            ["Spelling"] = item
         });
     }
 }

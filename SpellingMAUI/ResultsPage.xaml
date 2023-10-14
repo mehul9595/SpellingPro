@@ -5,7 +5,7 @@
              xmlns:models="clr-namespace:SpellingMAUI"
              Title="Results">
 
-    <ListView ItemsSource="{Binding Items}">
+    <ListView ItemsSource="{Binding Items}" x:Name="resultListView">
         <ListView.Header>
             <Grid Padding="10">
                 <Grid.RowDefinitions>

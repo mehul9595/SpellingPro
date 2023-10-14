@@ -3,15 +3,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SpellingMAUI.YourListPage"
              xmlns:models="clr-namespace:SpellingMAUI"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              Title="Your List">
-    <Grid RowDefinitions="*,Auto, Auto">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:IsNotNullConverter x:Key="IsNotNullConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid RowDefinitions="*,Auto, Auto, Auto">
         <CollectionView 
                   x:Name="SpellingCollection"
                   VerticalOptions="Fill"
                   ItemsSource="{Binding ObservableSpellingList}"
                   SelectionMode="Single"
                   >
-            <!--SelectionChanged="CollectionView_SelectionChanged"-->
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:Spelling">
                     <Grid ColumnDefinitions="25, 100, Auto" Padding="20">
@@ -21,17 +26,15 @@
                                     VerticalTextAlignment="Center"/>
                         <Label Text="{Binding Words}" Grid.Column="2"
                                     VerticalTextAlignment="Center"/>
-                        <!--<Label Text="✔️"
-                                   Grid.Column="1"
-                                   VerticalTextAlignment="Center"
-                                   IsVisible="{Binding Done}"/>-->
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-        <Button Grid.Row="1" Text="Add New Item" Clicked="OnItemAdded"
+        <Button Grid.Row="1" Text="Update" Clicked="OnItemUpdated"
+                Margin="20" IsVisible="{Binding Source={x:Reference SpellingCollection}, Path=SelectedItem, Converter={x:StaticResource IsNotNullConverter }}"/>
+        <Button Grid.Row="2" Text="Add" Clicked="OnItemAdded"
                 Margin="20"/>
-        <Button Grid.Row="2" Text="Practice" Clicked="OnPracticeClicked"
+        <Button Grid.Row="3" Text="Practice" Clicked="OnPracticeClicked"
         Margin="20"/>
     </Grid>
 </ContentPage>

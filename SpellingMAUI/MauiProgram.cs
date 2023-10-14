@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using CommunityToolkit.Maui;
+using Microsoft.Extensions.Logging;
 
 namespace SpellingMAUI
 {
@@ -9,6 +10,7 @@ namespace SpellingMAUI
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -16,8 +18,6 @@ namespace SpellingMAUI
                 });
             builder.Services.AddSingleton<YourListPage>();
             builder.Services.AddTransient<SpellingPage>();
-            //builder.Services.AddSingleton<TodoListPage>();
-            //builder.Services.AddTransient<TodoItemPage>();
             builder.Services.AddSingleton<MainPage>();
             builder.Services.AddSingleton<ResultsPage>();
             builder.Services.AddSingleton<SpellingsDatabase>();

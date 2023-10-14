@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             x:Class="SpellingMAUI.MainPage">
+             x:Class="SpellingMAUI.MainPage"
+             xmlns:models="clr-namespace:SpellingMAUI">
 
     <ScrollView>
         <VerticalStackLayout
@@ -17,7 +18,8 @@
                 HorizontalOptions="Center" />
 
             <Label
-                Text="Practice Spellings!"
+                Text="{Binding PracticeLabel}"
+                x:Name="PracticeLbl"
                 SemanticProperties.HeadingLevel="Level1"
                 FontSize="32"
                 HorizontalOptions="Center" />

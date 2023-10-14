@@ -5,10 +5,12 @@ namespace SpellingMAUI;
 public partial class ResultsPage : ContentPage
 {
     SpellingsDatabase database;
-    public ObservableCollection<UserScores> Items { get; set; } = new();
+
+    public ObservableCollection<UserScores> Items { get; set; }
     public ResultsPage(SpellingsDatabase todoItemDatabase)
     {
         InitializeComponent();
+        Items = new();
         database = todoItemDatabase;
         BindingContext = this;
     }
@@ -17,11 +19,10 @@ public partial class ResultsPage : ContentPage
     {
         base.OnNavigatedTo(args);
         var items = await database.GetItemsAsync();
-
+        
         await MainThread.InvokeOnMainThreadAsync(() =>
         {
-            Items.Clear();
-
+            Items?.Clear();
             foreach (var item in items.OrderByDescending(x => x.ID))
                 Items.Add(item);
         });

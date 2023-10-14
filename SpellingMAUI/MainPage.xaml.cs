@@ -2,7 +2,7 @@
 
 namespace SpellingMAUI;
 
-[QueryProperty("WordStr", "WordStr")]
+[QueryProperty("Spelling", "Spelling")]
 public partial class MainPage : ContentPage
 {
     int correct = 0;
@@ -14,21 +14,41 @@ public partial class MainPage : ContentPage
     private readonly SpellingsDatabase database;
 
     CancellationTokenSource cts;
+    private Spelling spelling;
+    private string practiceLabel;
 
     private List<string> Words { get; set; }
 
-    public string WordStr { get; set; }
+    public string PracticeLabel
+    {
+        get => practiceLabel; set
+        {
+            practiceLabel = value;
+            OnPropertyChanged(nameof(PracticeLabel));
+        }
+    }
 
-    public MainPage(SpellingsDatabase todoItemDatabase)
+    public Spelling Spelling
+    {
+        get => spelling; set
+        {
+            spelling = value;
+            if (spelling != null)
+                PracticeLabel = $"Practice: {spelling.Name}";
+        }
+    }
+
+    public MainPage(SpellingsDatabase spellingDatabase)
     {
         InitializeComponent();
 
-        database = todoItemDatabase;
+        database = spellingDatabase;
+        BindingContext = this;
     }
 
     private void LoadSpellings()
     {
-        Words = WordStr != null ? WordStr.Split(',').Select(x => x.Trim()).ToList() : new();
+        Words = Spelling != null ? Spelling.Words?.Split(',').Select(x => x.Trim()).ToList() : new();
     }
 
     private async void TxtSpell_Completed(object sender, EventArgs e)

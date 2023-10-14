@@ -7,10 +7,10 @@
     Shell.FlyoutBehavior="Disabled">
 
     <TabBar>
-        <ShellContent
+        <!--<ShellContent
             Title="Home"
             ContentTemplate="{DataTemplate local:MainPage}"
-            Route="MainPage" />
+            Route="MainPage" />-->
         <ShellContent
             Title="Your List"
             ContentTemplate="{DataTemplate local:YourListPage}"
