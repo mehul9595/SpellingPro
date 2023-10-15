@@ -192,4 +192,10 @@ public partial class MainPage : ContentPage
         incorrectWords.Clear();
         AnswerLbl.Text = "";
     }
+
+    private async void BackBtn_Clicked(object sender, EventArgs e)
+    {
+        StopBtn_Clicked(null, null);
+        await Shell.Current.GoToAsync("..");
+    }
 }

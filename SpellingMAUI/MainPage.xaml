@@ -41,6 +41,12 @@
                         Clicked="StopBtn_Clicked"
                         HorizontalOptions="End" IsEnabled="False">
                 </Button>
+                <Button x:Name="BackBtn" 
+                        Text="Back"
+                        SemanticProperties.Hint="Back"
+                        Clicked="BackBtn_Clicked"
+                        HorizontalOptions="End" IsEnabled="True">
+                </Button>
             </HorizontalStackLayout>
 
 
