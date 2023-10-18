@@ -19,6 +19,8 @@ public partial class MainPage : ContentPage
 
     private List<string> Words { get; set; }
 
+    private int WordsCount;
+
     public string PracticeLabel
     {
         get => practiceLabel; set
@@ -49,6 +51,7 @@ public partial class MainPage : ContentPage
     private void LoadSpellings()
     {
         Words = Spelling != null ? Spelling.Words?.Split(',').Select(x => x.Trim()).ToList() : new();
+        WordsCount = Words.Count;
     }
 
     private async void TxtSpell_Completed(object sender, EventArgs e)
@@ -76,7 +79,7 @@ public partial class MainPage : ContentPage
         }
 
         AnswerLbl.Text = currentWord;
-        ResultLbl.Text = $"Correct: {correct} | Incorrect: {incorrect}";
+        ResultLbl.Text = $"Correct: {correct} | Incorrect: {incorrect}  |   Progress: {correct + incorrect}/{WordsCount}";
 
         TxtSpell.Text = "";
 
@@ -186,7 +189,7 @@ public partial class MainPage : ContentPage
         currentWord = null;
 
         // reset stats
-        correct = incorrect = 0;
+        correct = incorrect = WordsCount = 0;
         ResultLbl.Text = "";
         ResultLbl.IsVisible = AnswerLbl.IsVisible = false;
         incorrectWords.Clear();
@@ -197,5 +200,13 @@ public partial class MainPage : ContentPage
     {
         StopBtn_Clicked(null, null);
         await Shell.Current.GoToAsync("..");
+    }
+
+    private async void ReplayBtn_Clicked(object sender, EventArgs e)
+    {
+        if (currentWord is null)
+            return;
+
+        await SpeakNowDefaultSettingsAsync(currentWord);
     }
 }

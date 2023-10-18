@@ -47,6 +47,12 @@
                         Clicked="BackBtn_Clicked"
                         HorizontalOptions="End" IsEnabled="True">
                 </Button>
+                <Button x:Name="ReplayBtn" 
+                        Text="Replay"
+                        SemanticProperties.Hint="Replay"
+                        Clicked="ReplayBtn_Clicked"
+                        HorizontalOptions="End" IsEnabled="True">
+                </Button>
             </HorizontalStackLayout>
 
 

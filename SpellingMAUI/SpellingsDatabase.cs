@@ -72,6 +72,6 @@ public class SpellingsDatabase
     public async Task<int> DeleteAsync<T>(T item)
     {
         await Init();
-        return await Database.DeleteAsync<T>(item);
+        return await Database.DeleteAsync(item);
     }
 }
