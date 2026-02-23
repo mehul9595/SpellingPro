@@ -1,4 +1,5 @@
-﻿using NHunspell;
+﻿using System.Linq;
+using NHunspell;
 
 namespace SpellingMAUI
 {
@@ -38,38 +39,13 @@ namespace SpellingMAUI
         {
             return hunspells.Any(x =>x.Spell(word));
         }
+
+        public bool Math(string correctWord, string word)
+        {
+            // this function checks the 'word' against the 'correctWord' and returns true if both are correct
+            var checkSuggestion = hunspells.Any(x => x.Suggest(correctWord).Contains(word));
+
+            return checkSuggestion == false ? correctWord == word && Spell(correctWord) && Spell(word) : checkSuggestion;
+        }
     }
 }
-
-
-
-//// ...
-
-//private void TxtSpell_Completed(object sender, EventArgs e)
-//{
-//    string text = ((Entry)sender).Text;
-
-//    if (string.IsNullOrEmpty(text))
-//    {
-//        return;
-//    }
-
-//    if (!string.IsNullOrEmpty(currentWord))
-//    {
-//        bool isCorrect = hunspell.Spell(text);
-
-//        if (isCorrect)
-//        {
-//            correct++;
-//            AnswerLbl.TextColor = Color.Parse("Green");
-//        }
-//        else
-//        {
-//            incorrect++;
-//            AnswerLbl.TextColor = Color.Parse("Red");
-//            incorrectWords.Add(currentWord);
-//        }
-//    }
-
-//    // ...
-//}

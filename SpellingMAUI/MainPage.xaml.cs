@@ -67,7 +67,7 @@ public partial class MainPage : ContentPage
             return;
         }
 
-        if (spellcheker.Spell(currentWord) == spellcheker.Spell(text))
+        if (spellcheker.Math(currentWord.ToLower(), text.ToLower()))
         {
             correct++;
             AnswerLbl.TextColor = Color.Parse("Green");
